@@ -10,6 +10,7 @@ namespace csharp_file_system
   {
     static void Main(string[] args)
     {
+      FileSystem FolderFun = new FileSystem();
       Console.WriteLine("C# File System");
       Console.WriteLine("---------------------");
       string input = Console.ReadLine();

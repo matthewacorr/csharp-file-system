@@ -14,7 +14,7 @@ namespace csharp_file_system
     private Node rightSibling;
   }
 
-  public class csharp_file_system
+  public class FileSystem
   {
     private Node root;
 
