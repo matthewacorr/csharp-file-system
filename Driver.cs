@@ -10,9 +10,12 @@ namespace csharp_file_system
   {
     static void Main(string[] args)
     {
+
+      FileSystem FolderFun = new FileSystem(); // Create new file system
       Console.WriteLine("C# File System");
       Console.WriteLine("---------------------");
-      string input = Console.ReadLine();
+
+      string input = Console.ReadLine(); // Take user input for switch statement
       switch(input)
       {
       case "ls":
