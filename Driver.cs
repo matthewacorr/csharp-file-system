@@ -1,51 +1,59 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace csharp_file_system
 {
-  class Driver
-  {
-    static void Main(string[] args)
-    {
+class Driver
+{
+static void Main(string[] args)
+{
+        FileSystem FolderFun = new FileSystem(); // Create new file system
+        Console.WriteLine("C# File System\n---------------------\nPress Ctrl+C to exit");
 
-      FileSystem FolderFun = new FileSystem(); // Create new file system
-      Console.WriteLine("C# File System");
-      Console.WriteLine("---------------------");
+        while(true)
+        {
+                string usrInput = Console.ReadLine(); // Take user input for switch statement
+                switch(usrInput)
+                {
 
-      string input = Console.ReadLine(); // Take user input for switch statement
-      switch(input)
-      {
-      case "ls":
-        // Lists Current directory
-      break;
+                case "print":
+                        FolderFun.PrintFileSystem();
+                        break;
 
-      case "numfile":
-        // Return number of files in the file system
-      break;
+                case "numfile":
+                        Console.WriteLine("There are {0} files in the entire file system", FolderFun.NumberFiles());
+                        break;
 
-      case "addfile":
-        // Add a file
-      break;
+                case "addfile":
+                        Console.WriteLine("Please enter the path to the directory that you would like to add a file to (Example: root/home/matt/)");
+                        string input = Console.ReadLine();
+                        FolderFun.AddFile(input);
+                        break;
 
-      case "addfolder":
-        // Add a file
-      break;
+                case "delfile":
+                        Console.WriteLine("Please enter the path you want to delete a file from (Example: root/home/matt/)");
+                        input = Console.ReadLine();
+                        FolderFun.RemoveFile(input);
+                        break;
 
-      case "deldir":
-        // Deletes directory
-      break;
+                case "addfolder":
+                        Console.WriteLine("Please enter the path you want to add the folder to (Example: root/home/matt/FOLDERNAME)");
+                        input = Console.ReadLine();
+                        FolderFun.AddDirectory(input);
+                        break;
 
-      case "delfile":
-        // Deletes file
-      break;
+                case "delfolder":
+                        Console.WriteLine("Please enter the path of the directory you would like to remove (Example: root/home/matt would delete the folder\"matt\"");
+                        input = Console.ReadLine();
+                        FolderFun.RemoveDirectory(input);
+                        break;
 
-      case "help":
-        // Prints out a list of all possible commands
-      break;
-      }
-    }
-  }
+                case "help":
+                        Console.WriteLine("Possible Commands\n-----------------");
+                        Console.WriteLine("");
+                        break;
+                }
+        }
+}
+}
 }

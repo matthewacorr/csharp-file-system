@@ -1,0 +1,11 @@
+/home/matt/Code/csharp/csharp-file-system/bin/Debug/netcoreapp2.1/csharp-file-system.deps.json
+/home/matt/Code/csharp/csharp-file-system/bin/Debug/netcoreapp2.1/csharp-file-system.runtimeconfig.json
+/home/matt/Code/csharp/csharp-file-system/bin/Debug/netcoreapp2.1/csharp-file-system.runtimeconfig.dev.json
+/home/matt/Code/csharp/csharp-file-system/bin/Debug/netcoreapp2.1/csharp-file-system.dll
+/home/matt/Code/csharp/csharp-file-system/bin/Debug/netcoreapp2.1/csharp-file-system.pdb
+/home/matt/Code/csharp/csharp-file-system/obj/Debug/netcoreapp2.1/csharp-file-system.csprojAssemblyReference.cache
+/home/matt/Code/csharp/csharp-file-system/obj/Debug/netcoreapp2.1/csharp-file-system.csproj.CoreCompileInputs.cache
+/home/matt/Code/csharp/csharp-file-system/obj/Debug/netcoreapp2.1/csharp-file-system.AssemblyInfoInputs.cache
+/home/matt/Code/csharp/csharp-file-system/obj/Debug/netcoreapp2.1/csharp-file-system.AssemblyInfo.cs
+/home/matt/Code/csharp/csharp-file-system/obj/Debug/netcoreapp2.1/csharp-file-system.dll
+/home/matt/Code/csharp/csharp-file-system/obj/Debug/netcoreapp2.1/csharp-file-system.pdb
