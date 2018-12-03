@@ -1,6 +1,6 @@
-﻿using System; // Import system methods
-using System.Collections.Generic; // Import Lists
-using System.Text.RegularExpressions; // Import Regex
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace csharp_file_system
 {
@@ -11,11 +11,10 @@ namespace csharp_file_system
     private Node leftMostChild;
     private Node rightSibling;
 
-    // Public data members with Get and Set properties.
-    public string Directory {set{this.directory=value;} get{return this.directory;}}
-    public List<string> File {set{this.File=value;} get{return this.File;}}
-    public Node LeftMostChild {set{this.leftMostChild=value;} get{return this.leftMostChild;}}
-    public Node RightSibling {set{this.rightSibling=value;} get{return this.rightSibling;}}
+    public string Directory{set{this.directory=value;}get{return this.directory;}}
+    public List<string> File {set{this.file=value;}get{return this.file;}}
+    public Node LeftMostChild {set{this.leftMostChild=value;}get{return this.leftMostChild;}}
+    public Node RightSibling {set{this.rightSibling=value;}get{return this.rightSibling;}}
 
     public Node(string directory, List<string> file, Node leftMostChild, Node rightSibling)
     {
@@ -29,59 +28,57 @@ namespace csharp_file_system
   public class FileSystem
   {
     private Node root;
-    public Node test;
     // Creates a file system with a root directory
     public FileSystem()
     {
-      this.root = new Node("root", null, null, null); // Contruct the root node (directory)
+      this.root = new Node("root", null, null, null); // Create a node called with the name root, no files(list) and no children.
     }
 
     // Adds a file at the given address
     // Returns false if the file already exists or the path is undefined true otherwise
     public bool AddFile(string address)
     {
-      try{
-        Node current = this.root;
+      Node current = ParseString(address, this.root);
+      try
+      {
         string fileName = "";
-        ParseStr(address, current);
         if (current.File == null)
         {
-          Console.WriteLine("Please enter the name of the file you would like to add");
+          current.File = new List<string>();
+          Console.Write("Enter new file name >");
           fileName = Console.ReadLine();
           current.File.Add(fileName);
           return true;
         }
         else
         {
-          foreach(string item in current.File)
+          foreach (string item in current.File)
           {
-            if (fileName == item)
+            if(fileName == item)
             {
               return false;
             }
-        }
-        Console.WriteLine("Please enter the name of the file you would like to add");
+          }
+        Console.Write("Enter new file name > ");
         fileName = Console.ReadLine();
         current.File.Add(fileName);
         return true;
         }
       }
-      catch {Console.WriteLine("Couldn't add file! (Has the file name already been used in this directory?)"); return false;}
+      catch{return false;}
     }
 
     // Removes the file at the given address
     // Returns false if the file is not found or the path is undefined ; true otherwise
     public bool RemoveFile(string address)
     {
+      Node current = ParseString(address, this.root);
       try
       {
-        Node current = this.root;
-        ParseStr(address,current);
-        string fileName = "";
-
-        if(current.File == null)
+        Console.Write("Name of file to be removed > ");
+        string fileName = Console.ReadLine();
+        if (current.File == null)
         {
-          Console.WriteLine("Nothing to remove!");
           return false;
         }
         else
@@ -90,119 +87,192 @@ namespace csharp_file_system
           {
             if (fileName == item)
             {
-              Console.Write("Enter the name of the file you would like to delete: ");
-              fileName = Console.ReadLine();
               current.File.Remove(fileName);
-              Console.WriteLine("File deleted successfully!");
               return true;
             }
           }
-          Console.WriteLine("Couldn't add file!");
-          return false;
+          return true;
         }
       }
-      catch {Console.WriteLine("Couldn't add file! (Has the file name already been used in this directory?)"); return false;}
+      catch{return false;}
     }
 
-    // Adds a directory at the given address
-    // Returns false if the directory already exists or the path is undefined; true otherwise
     public bool AddDirectory(string address)
+    {
+      Node current = ParseString(address, this.root);
+
+      if (current.LeftMostChild == null) // If the left child is empty
+      {
+        Console.Write("New directory name > ");
+        string dirName = Console.ReadLine();
+        current.LeftMostChild = new Node(dirName, null, null, null); // Create a new directory at the left child
+        return true; // Success
+      }
+      else if (current.RightSibling == null) // If the left is full and right is empty
+      {
+        //code needed to add
+        Console.Write("New directory name > ");
+        string dirName = Console.ReadLine();
+        current.RightSibling = new Node(dirName, null, null, null); // Create a new directory at the right child
+        return true; // Success
+      }
+      else {Console.WriteLine("Couldn't add directory, both child nodes are full! Please try another directory");return false;} // If both child nodes are full
+    }
+
+    public bool RemoveDirectory(string address)
     {
       try
       {
-        Node current = this.root;   // Set current node to root
-        ParseStr(address, current);
-        // Once at the correct node add new node
-        if(current.LeftMostChild == null)
+        Node current = ParseString(address, this.root);
+        Console.Write("Name of directory to remove > ");
+        string dirName = Console.ReadLine();
+        if (current.LeftMostChild.Directory == dirName)
         {
-          Console.Write("Enter the name of the directory you would like to add: ");
-          string dirName = Console.ReadLine();
-          current.LeftMostChild = new Node(dirName, null, null, null);
+          current.LeftMostChild = null;
           return true;
         }
-        else if(current.RightSibling == null)
+        else if(current.RightSibling.Directory == dirName)
         {
-          Console.Write("Enter the name of the directory you would like to add: ");
-          string dirName = Console.ReadLine();
-          current.RightSibling = new Node(dirName, null, null, null);
+          current.RightSibling = null;
           return true;
         }
-        else{
-          return false;
-        }
+        else{Console.WriteLine("Couldn't remove directory! (Two directories already exist in this node)");return false;} // If both children are full
       }
-      catch {Console.WriteLine("Couldn't add directory! (Has the folder name already been used?)"); return false;}
-    }
-
-    // Removes the directory (and its subdirectories) at the given address
-    // Returns false if the directory is not found or the path is undefined; true otherwise
-    public bool RemoveDirectory(string address)
-    {
-    try{
-      Node current = this.root;
-      ParseStr(address, current);
-      Console.WriteLine("Enter the name of the folder you would like to delete");
-      string dirName = Console.ReadLine();
-      if (current.LeftMostChild.Directory == dirName)
-      {
-        current.LeftMostChild = null;   // Remove the child
-      }
-      else if (current.RightSibling.Directory == dirName)
-      {
-        current.RightSibling = null;   // Remove the child
-      }
-      return true;
-    }
-    catch {Console.WriteLine("Couldn't remove file! (Did you use the correct path?)"); return false;}
+      catch{Console.WriteLine("Couldn't remove directory! (Did you use the correct path and directory name?)");return false;} // Unknown failure
     }
 
     // Returns the number of files in the file system
     public int NumberFiles()
     {
-      int totalFiles = 0;
-      // Need to recursivly go through linked list of nodes and then add up the current.Files.Length to get the amount of items in each list
-      return totalFiles;
+      int TotalCount = 0;
+      Node current = this.root;
+      Counting(current);
+
+      void Counting(Node n)
+      {
+        if (n.LeftMostChild == null && n.RightSibling == null)
+        {
+          TotalCount += n.File.Count;
+        }
+
+        else
+        {
+          TotalCount += n.File.Count;
+          Counting(n.LeftMostChild);
+
+          if (n.RightSibling != null)
+          {
+            TotalCount += n.File.Count;
+            Counting(n.RightSibling);
+          }
+        }
+      }
+      return TotalCount;
     }
 
     // Prints the directories in a pre - order fashion along with their files
     public void PrintFileSystem()
     {
-      // Need to Implement
-    }
+      Node current = this.root;
+      PrintLoop(current);
 
-    private Node ParseStr(string address, Node current)
-    {
-      try
+      void PrintLoop(Node curr)
       {
-        string[] dirArray = Regex.Split(address, "/");
-        if(dirArray.Length != 1)
+        if(curr.LeftMostChild == null && curr.RightSibling == null)
         {
-          foreach (string dir in dirArray)
+          Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+          Console.WriteLine("Directory: {0}", curr.Directory);
+          Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+          if (curr.File != null)
           {
-            if (current.RightSibling.Directory == dir)
+            foreach (string file in curr.File)
             {
-              current = current.RightSibling;
-            }
-            else if (current.LeftMostChild.Directory == dir)
-            {
-              current = current.LeftMostChild;
+              Console.WriteLine("\t- {0}", file);
             }
           }
-          return current;
-        }
-        else if (current.Directory == "root")
-        {
-          return null;
         }
         else
         {
-          return null;
+          Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+          Console.WriteLine("Directory: {0}", curr.Directory);
+          Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+          if(curr.File != null)
+          {
+            foreach (string file in curr.File)
+            {
+              Console.WriteLine("\t- {0}", file);
+            }
+          }
+          PrintLoop(curr.LeftMostChild);
+
+          if(curr.RightSibling != null)
+          {
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("Directory: {0}", curr.Directory);
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            if (curr.File != null)
+            {
+              foreach (string file in curr.File)
+              {
+                Console.WriteLine("\t- {0}", file);
+              }
+            }
+            PrintLoop(curr.RightSibling);
+          }
         }
       }
-      catch
+    }
+
+    private Node ParseString(string address, Node current)
+    {
+      string[] dirArray = Regex.Split(address, "/");
+      int loopCount = 0;
+
+      foreach(string dir in dirArray)
       {
-        return null;
+        if(dir == null) // Check if there are any null spaces in dirArray
+        {
+          current.File.Remove(dir);
+        }
       }
+
+      if (current.Directory == "root" && dirArray.Length == 1) //To check if the only directory is root
+      {
+        return current;
+      }
+
+      foreach (string dir in dirArray)
+      {
+        if (current.Directory != dirArray[dirArray.Length - 1])
+        {
+          if (current.LeftMostChild == null && current.RightSibling == null)
+          {
+            loopCount++;
+            return current;
+          }
+
+          if (loopCount <= dirArray.Length)
+          {
+            if (current.LeftMostChild != null)
+            {
+              if (current.LeftMostChild.Directory == dirArray[loopCount + 1])
+              {
+                current = current.LeftMostChild;
+                loopCount++;
+              }
+              if (current.RightSibling != null)
+              {
+                if (current.RightSibling.Directory == dirArray[loopCount + 1])
+                {
+                  current = current.RightSibling;
+                  loopCount++;
+                }
+              }
+            }
+          }
+        }
+      }
+      return current;
     }
   }
 }

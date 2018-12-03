@@ -1,59 +1,86 @@
 using System;
-using System.Collections.Generic;
 
 namespace csharp_file_system
 {
-class Driver
-{
-static void Main(string[] args)
-{
-        FileSystem FolderFun = new FileSystem(); // Create new file system
-        Console.WriteLine("C# File System\n---------------------\nPress Ctrl+C to exit");
-
+  class Driver
+  {
+    static void Main(string[] args)
+    {
+      try{
+        FileSystem FolderFun = new FileSystem();
+        Console.WriteLine("C# File System (Enter \"help\" for all possible commands)\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         while(true)
         {
-                string usrInput = Console.ReadLine(); // Take user input for switch statement
-                switch(usrInput)
-                {
+          Console.Write("> ");
+          string input = Console.ReadLine();
+          Console.WriteLine(" ");
+          switch(input)
+          {
+            case "print":
+              FolderFun.PrintFileSystem();
+            break;
 
-                case "print":
-                        FolderFun.PrintFileSystem();
-                        break;
+            case "numfile":
+              Console.WriteLine("There are {0} files in the system", FolderFun.NumberFiles());
+            break;
 
-                case "numfile":
-                        Console.WriteLine("There are {0} files in the entire file system", FolderFun.NumberFiles());
-                        break;
+            case "addfile":
+              Console.Write("Enter the path you wish to add the file too (ex: root/home)\n> ");
+              if(FolderFun.AddFile(Console.ReadLine()) == true){Console.WriteLine("File Added!");}
+              else{Console.WriteLine("Couldn't add file! (Did you use the right path?)");}
+            break;
 
-                case "addfile":
-                        Console.WriteLine("Please enter the path to the directory that you would like to add a file to (Example: root/home/matt/)");
-                        string input = Console.ReadLine();
-                        FolderFun.AddFile(input);
-                        break;
+            case "remfile":
+              Console.Write("Enter the path you wish to delete the file from (ex: root/home)\n> ");
+              if(FolderFun.RemoveFile(Console.ReadLine()) == true) {Console.WriteLine("File Removed!");}
+              else{Console.WriteLine("Couldn't remove file! (Did you use the right path?)");}
+            break;
 
-                case "delfile":
-                        Console.WriteLine("Please enter the path you want to delete a file from (Example: root/home/matt/)");
-                        input = Console.ReadLine();
-                        FolderFun.RemoveFile(input);
-                        break;
+            case "addfolder":
+            Console.Write("Enter the path you wish to add the folder too (ex: root/home)\n> ");
+            if(FolderFun.AddDirectory(Console.ReadLine()) == true) {Console.WriteLine("Directory Created!");}
+            else{Console.WriteLine("Couldn't add folder! (Does the folder already exist?)");}
+            break;
 
-                case "addfolder":
-                        Console.WriteLine("Please enter the path you want to add the folder to (Example: root/home/matt/FOLDERNAME)");
-                        input = Console.ReadLine();
-                        FolderFun.AddDirectory(input);
-                        break;
+            case "remfolder":
+            Console.Write("Enter the path you wish to delete the folder from (ex: root/home)\n> ");
+            if(FolderFun.RemoveDirectory(Console.ReadLine()) == true) {Console.WriteLine("Directory Removed!");}
+            else{Console.WriteLine("Couldn't remove folder! (Does the folder already exist?)");}
+            break;
 
-                case "delfolder":
-                        Console.WriteLine("Please enter the path of the directory you would like to remove (Example: root/home/matt would delete the folder\"matt\"");
-                        input = Console.ReadLine();
-                        FolderFun.RemoveDirectory(input);
-                        break;
+            case "help":
+              Console.WriteLine("Possible Commands: ");
+              Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~");
+              Console.WriteLine("addfolder  -  Adds a directory to a specified path");
+              Console.WriteLine("remfolder  -  Removes a directory from a specified path");
+              Console.WriteLine("addfile    -  Adds a file to a specified path");
+              Console.WriteLine("remfile    -  Removes a file to a specified path");
+              Console.WriteLine("print      -  Prints all folders and files in the File System");
+              Console.WriteLine("numfile    -  Returns the amount of files in the File System");
+              Console.WriteLine("help       -  Prints this dialog");
+              Console.WriteLine("clear      -  Clears the console output");
+              Console.WriteLine("exit       -  Exits the program");
+            break;
 
-                case "help":
-                        Console.WriteLine("Possible Commands\n-----------------");
-                        Console.WriteLine("");
-                        break;
-                }
+            case "clear":
+              Console.WriteLine("Clearing Screen...");
+              Console.Clear();
+            break;
+
+            case "exit":
+              Console.WriteLine("Exiting...");
+              Environment.Exit(0);
+            break;
+
+            default:
+              Console.WriteLine("Not a recognized command (Enter \"help\" for a list of possible commands)");
+            break;
+          }
         }
-}
-}
+      }
+      catch{
+        Console.WriteLine("Not a valid command!");
+      }
+    }
+  }
 }
