@@ -1,4 +1,16 @@
-using System;
+using System; // Import system methods
+
+//
+//  C# File System
+//  Dec 02 2018
+//
+//  Description: This is a program which uses nodes and lists to create a virtual filesystem with the
+//               ability to add and delete files and directories. The driver.cs file runs the user input
+//               and the helpers.cs is what holds the FileSystem and all of it's methods
+//
+//  Made by: Matthew Corr (0626013)
+//           Trevor Hill
+//
 
 namespace csharp_file_system
 {

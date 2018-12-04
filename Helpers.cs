@@ -1,6 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System; // Import system methods
+using System.Collections.Generic; // Import Lists
+using System.Text.RegularExpressions; // Import Regular Expressions
+
+//
+//  C# File System
+//  Dec 02 2018
+//
+//  Description: This is a program which uses nodes and lists to create a virtual filesystem with the
+//               ability to add and delete files and directories. The driver.cs file runs the user input
+//               and the helpers.cs is what holds the FileSystem and all of it's methods
+//
+//  Made by: Matthew Corr (0626013)
+//           Trevor Hill
+//
 
 namespace csharp_file_system
 {
