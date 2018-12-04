@@ -58,7 +58,7 @@ namespace csharp_file_system
             break;
 
             case "deldir":
-            Console.Write("Enter the path to the directory whichs contains the folder to be deleted"); // Prompt user for the path
+            Console.Write("Enter the path to the directory whichs contains the folder to be deleted > "); // Prompt user for the path
             if(FolderFun.RemoveDirectory(Console.ReadLine()) == true) {Console.WriteLine("Directory Removed!\n");} // Call RemoveDirectory with the user input
             else{Console.WriteLine("Couldn't remove folder! (Does the folder already exist?)");} // If the directory cannont be removed
             break;
