@@ -50,7 +50,7 @@ namespace csharp_file_system
         if (current.File == null) // If there is no list inside of the node
         {
           current.File = new List<string>(); // Create a new list called File
-          Console.Write("Enter new file name > "); // Take user input
+          Console.Write("Enter a name for the new file > "); // Take user input
           fileName = Console.ReadLine();
           current.File.Add(fileName); // Add that file to the list
           return true; // Successful
@@ -65,7 +65,7 @@ namespace csharp_file_system
               return false; // Failed
             }
           }
-        Console.Write("Enter new file name > "); // Take user input
+        Console.Write("Enter a name for the new file > "); // Take user input
         fileName = Console.ReadLine();
         current.File.Add(fileName); // Add the file to the list
         return true; // Success
@@ -81,7 +81,7 @@ namespace csharp_file_system
       Node current = ParseString(address, this.root); // Sends the directory path and node to ParseString
 
       try{
-        Console.Write("Name of file to be removed > "); // Take user input
+        Console.Write("Enter the name of the file to remove > "); // Take user input
         string fileName = Console.ReadLine();
         if (current.File == null) // If there is no list in the node
         {
@@ -109,14 +109,14 @@ namespace csharp_file_system
 
       if (current.LeftMostChild == null) // If the left child is empty
       {
-        Console.Write("New directory name > "); // Take user input
+        Console.Write("Enter a name for the new directory > "); // Take user input
         string dirName = Console.ReadLine();
         current.LeftMostChild = new Node(dirName, null, null, null); // Create a new directory at the left child
         return true; // Success
       }
       else if (current.RightSibling == null) // If the left is full and right is empty
       {
-        Console.Write("New directory name > "); // Take user input
+        Console.Write("Enter a name for the new directory > "); // Take user input
         string dirName = Console.ReadLine();
         current.RightSibling = new Node(dirName, null, null, null); // Create a new directory at the right child
         return true; // Success
@@ -130,7 +130,7 @@ namespace csharp_file_system
       try{
         Node current = ParseString(address, this.root); // Sends the directory path and node to ParseString
 
-        Console.Write("Name of directory to remove > "); // Take user input
+        Console.Write("Enter the name of the directory to remove > "); // Take user input
         string dirName = Console.ReadLine();
         if (current.LeftMostChild.Directory == dirName) // If the name of the directory on the left child matches the directory to be removed
         {

@@ -29,25 +29,25 @@ namespace csharp_file_system
 
             case "newfile":
               Console.Write("Enter the path you wish to add the file too > "); // Prompt user for the path
-              if(FolderFun.AddFile(Console.ReadLine()) == true){Console.WriteLine("\nFile Added!\n");} // Call AddFile and send the user input
+              if(FolderFun.AddFile(Console.ReadLine()) == true){Console.WriteLine("File Added!\n");} // Call AddFile and send the user input
               else{Console.WriteLine("Couldn't add file! (Did you use the right path?)");} // If the file can't be added
             break;
 
             case "delfile":
               Console.Write("Enter the path you wish to delete the file from > "); // Prompt user for the path
-              if(FolderFun.RemoveFile(Console.ReadLine()) == true) {Console.WriteLine("\nFile Removed!\n");} // Call RemoveFile and send the user input
+              if(FolderFun.RemoveFile(Console.ReadLine()) == true) {Console.WriteLine("File Removed!\n");} // Call RemoveFile and send the user input
               else{Console.WriteLine("Couldn't remove file! (Did you use the right path?)");} // If the file can't be removed
             break;
 
             case "newdir":
             Console.Write("Enter the path to the directory which will contain the new folder > "); // Prompt user for the path
-            if(FolderFun.AddDirectory(Console.ReadLine()) == true) {Console.WriteLine("\nDirectory Created!\n");} // Call AddDirectory with the user input
+            if(FolderFun.AddDirectory(Console.ReadLine()) == true) {Console.WriteLine("Directory Created!\n");} // Call AddDirectory with the user input
             else{Console.WriteLine("Couldn't add folder! (Does the folder already exist?)");} // If the directory couldn't be added
             break;
 
             case "deldir":
             Console.Write("Enter the path to the directory whichs contains the folder to be deleted"); // Prompt user for the path
-            if(FolderFun.RemoveDirectory(Console.ReadLine()) == true) {Console.WriteLine("\nDirectory Removed!\n");} // Call RemoveDirectory with the user input
+            if(FolderFun.RemoveDirectory(Console.ReadLine()) == true) {Console.WriteLine("Directory Removed!\n");} // Call RemoveDirectory with the user input
             else{Console.WriteLine("Couldn't remove folder! (Does the folder already exist?)");} // If the directory cannont be removed
             break;
 
@@ -81,7 +81,7 @@ namespace csharp_file_system
             default: // Output if an invalid command is entered
               Console.ForegroundColor = ConsoleColor.Red; // Alert color
               Console.WriteLine("Not a recognized command (Enter \"help\" for a list of possible commands)");
-              Console.ForegroundColor = ConsoleColor.White; // Reset foreground color
+              Console.ForegroundColor = ConsoleColor.White; // Reset foreground color:w
             break;
           }
         }
