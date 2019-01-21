@@ -1,4 +1,4 @@
-using System; // Import system methods
+ using System; // Import system methods
 using System.Collections.Generic; // Import Lists
 using System.Text.RegularExpressions; // Import Regular Expressions
 
@@ -221,7 +221,7 @@ namespace csharp_file_system
           }
         }
         else // If the current node is not a leaf node
-        {
+        {}
           Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
           Console.WriteLine("Directory: {0}", curr.Directory); // Print the name of the directory
           Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
